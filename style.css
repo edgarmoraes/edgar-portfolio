@@ -1,10 +1,11 @@
 /* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 /* Universal Styles */
 :root {
-  --primary-font: Inter, -apple-system, BlinkMacSystemFont, Helvetica, sans-serif;
+  --primary-font: Inter, Quicksand, -apple-system, BlinkMacSystemFont, Helvetica, sans-serif;
   --background-color: #ffffff;
   --text-color: #000000;
 }
@@ -23,15 +24,17 @@ section {
     padding: 20px;
 }
 
+/* NAV-BAR */
 .nav-bar {
     position: fixed;
-    background: #3d3d3da1;
+    background: #412f00a1;
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     backdrop-filter: blur(10px);
+    top: 0;
 }
 
 .container-right {
@@ -57,14 +60,28 @@ section {
     list-style: none;
 }
 
-.nav-itens>li {
+.nav-itens li {
     padding-left: 20px;
 }
 
-.nav-itens>li>a {
+.nav-itens li a {
+    color: rgb(255, 255, 255);
     text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
+    font-size: 20px;
 }
 
+.nav-itens li a:hover {
+    color: #007413;
+}
+
+#edgar-signature-white {
+    display: block;
+    margin-right: 50px;
+}
+
+/* TOPICS */
 .project {
     background: #f4f4f4;
     margin: 20px 0px;
@@ -76,22 +93,7 @@ section {
     margin: auto;
 }
 
-#profile-photo {
-    display: block;
-    margin: 0 auto 20px;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-#edgar-signature-white {
-    display: block;
-    width: 100px;
-    height: 100px;
-    margin-right: 50px;
-}
-
+/* LANGUAGE TOGGLE */
 #lang-toggle img {
     transition: transform 0.5s ease, opacity 0.5s ease;
   }
@@ -139,7 +141,7 @@ section {
 
 .toggle .button {
     transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), inset 0 -1px 2px -1px rgba(0, 0, 0, 0.2), 0 -2px 4px -1px rgba(255, 255, 255, 0.6), inset 0 1px 2px -1px rgb(139, 139, 139), inset 0 0 2px 1px rgba(167, 167, 167, 0.8), inset 0 5px 8px 0 rgba(54, 54, 54, 0.486);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), inset 0 -1px 2px -1px rgba(0, 0, 0, 0.2), 0 -2px 4px -1px rgba(175, 175, 175, 0.418), inset 0 1px 2px -1px rgb(139, 139, 139), inset 0 0 2px 1px rgba(167, 167, 167, 0.8), inset 0 5px 8px 0 rgba(54, 54, 54, 0.486);
     border-radius: 12.5px;
     position: absolute;
     background: #eaeaea;
@@ -187,16 +189,87 @@ section {
     font-size: 11px; /* Slightly adjusted for active state */
     color: rgba(0, 0, 0, 0.45); /* Or rgba(0, 0, 0, 0.8) for checked state */
 }
-  
+
+.information {
+    display: grid;
+    margin: 10rem 5rem 0rem 5rem;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.span-3 {
+    grid-column: span 3;
+}
+
+.span-2 {
+    grid-column: span 2;
+}
+
+.cards-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.about-me-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.about-me,
+.industry-experience,
+.social-networks {
+    display: flex;
+    justify-content: flex-start;
+    margin: 25px;
+    color: #000000;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px -2px rgba(0, 0, 0, 0.281);
+}
+
+.industry-experience {
+    padding-left: 100px;
+    color: #ffffff;
+    font-size: 20px;
+    background-color: #2b2b2b;
+}
+
+.industry-experience p {
+    margin: 15px;
+}
+
+.social-networks {
+    padding-left: 100px;
+    height: 100%;
+    flex-direction: column;
+}
+
+.social-networks ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    text-decoration: none;
+    padding: 0px;
+}
 
 [data-theme="dark"] {
-    --background-color: #363537;
+    --background-color: #1d1d1d;
     --text-color: #FAFAFA;
 
-    header {
-        background: #3b3b3b;
-        color: #fff;
-        text-align: center;
+    .nav-bar {
+        position: fixed;
+        background: #161000a1;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        align-items: center;
+        backdrop-filter: blur(10px);
+        top: 0;
+    }
+
+    .about-me-content {
+        color: #000000;
     }
 
     .project {
