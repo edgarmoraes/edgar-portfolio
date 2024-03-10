@@ -2,44 +2,72 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
-/* Estilos Universais */
+/* Universal Styles */
 :root {
   --primary-font: Inter, -apple-system, BlinkMacSystemFont, Helvetica, sans-serif;
+  --background-color: #ffffff;
+  --text-color: #000000;
 }
 
 body {
-    font-family: var(--primary-font);
-}
-
-header {
-    background: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-}
-
-header nav ul {
-    list-style: none;
     padding: 0;
-}
-
-header nav ul li {
-    display: inline;
-    margin: 0 10px;
-}
-
-header nav ul li a {
-    color: #fff;
-    text-decoration: none;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--primary-font);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
 }
 
 section {
     padding: 20px;
 }
 
+.nav-bar {
+    position: fixed;
+    background: #3d3d3da1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(10px);
+}
+
+.container-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 20px 80px;
+}
+
+.container-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 20px 80px;
+}
+
+.lang-toggle {
+    margin-left: 50px;
+}
+
+.nav-itens {
+    display: flex;
+    list-style: none;
+}
+
+.nav-itens>li {
+    padding-left: 20px;
+}
+
+.nav-itens>li>a {
+    text-decoration: none;
+}
+
 .project {
     background: #f4f4f4;
-    margin: 20px 0;
+    margin: 20px 0px;
     padding: 15px;
 }
 
@@ -50,9 +78,130 @@ section {
 
 #profile-photo {
     display: block;
-    margin: 0 auto 20px; /* Center the image and add some margin below */
-    width: 150px; /* Set a fixed width */
-    height: 150px; /* Maintain aspect ratio, adjust as needed */
-    border-radius: 50%; /* Make the photo round */
-    object-fit: cover; /* Ensure the photo covers the set width/height without distortion */
+    margin: 0 auto 20px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#edgar-signature-white {
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin-right: 50px;
+}
+
+#lang-toggle img {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+  
+  #lang-toggle img.slide-out {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  
+  #lang-toggle img.slide-in {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .toggle {
+    display: inline-block;
+    position: relative;
+    height: 25px;
+    width: 25px;
+}
+
+.light-dark-button {
+    margin-left: 10px;
+}
+
+.toggle:before {
+    box-shadow: 0;
+    border-radius: 12.5px;
+    background: #fff;
+    position: absolute;
+    margin-left: -12.5px;
+    margin-top: -12.5px;
+    opacity: 0.2;
+    height: 18px;
+    width: 18px;
+    left: 100%;
+    top: 100%;
+    transform: translate(-50%, -50%);
+}
+
+/* Corrected typo from .toogle to .toggle */
+.toggle input:checked ~ .label {
+    color: rgba(255,0,0,0.8);
+}
+
+.toggle .button {
+    transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), inset 0 -1px 2px -1px rgba(0, 0, 0, 0.2), 0 -2px 4px -1px rgba(255, 255, 255, 0.6), inset 0 1px 2px -1px rgb(139, 139, 139), inset 0 0 2px 1px rgba(167, 167, 167, 0.8), inset 0 5px 8px 0 rgba(54, 54, 54, 0.486);
+    border-radius: 12.5px;
+    position: absolute;
+    background: #eaeaea;
+    margin-left: -12.5px; /* Adjusted for new size */
+    margin-top: -12.5px; /* Adjusted for new size */
+    display: block;
+    height: 25px; /* Adjusted for new size */
+    width: 25px; /* Adjusted for new size */
+    left: 100%;
+    top: 100%;
+    transform: translate(-50%, -50%);
+}
+
+.toggle .label {
+    transition: color 300ms ease-out;
+    line-height: 25px; /* Adjusted for new height */
+    text-align: center;
+    position: absolute;
+    font-weight: 700;
+    font-size: 12px; /* Adjusted for readability at new size */
+    display: block;
+    opacity: 0.9;
+    height: 100%;
+    width: 100%;
+    color: rgba(0, 0, 0, 0.9);
+}
+
+.toggle input {
+    opacity: 0;
+    position: absolute;
+    cursor: pointer;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.toggle input:active ~ .button, .toggle input:checked ~ .button {
+    filter: blur(0.3px); /* Adjusted for subtlety */
+    box-shadow: 0 3px 6px -2px rgba(0, 0, 0, 0.4), inset 0 -2px 6px rgba(255, 255, 255, 0.9), inset 0 2px 5px rgba(0, 0, 0, 0.4), inset 0 0 2px rgba(255, 255, 255, 0.6);
+}
+
+.toggle input:active ~ .label, .toggle input:checked ~ .label {
+    font-size: 11px; /* Slightly adjusted for active state */
+    color: rgba(0, 0, 0, 0.45); /* Or rgba(0, 0, 0, 0.8) for checked state */
+}
+  
+
+[data-theme="dark"] {
+    --background-color: #363537;
+    --text-color: #FAFAFA;
+
+    header {
+        background: #3b3b3b;
+        color: #fff;
+        text-align: center;
+    }
+
+    .project {
+        background: #292929;
+        margin: 20px 0;
+        padding: 15px;
+    }
 }
