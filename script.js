@@ -32,58 +32,70 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     const toggleBtn = document.getElementById('lang-toggle');
-    const img = toggleBtn.querySelector('img'); // Ensure the image is correctly targeted
-    let isAnimating = false; // Flag to block clicks during animation
+    const img = toggleBtn.querySelector('img');
+    let isAnimating = false;
+
+    // Function to update text contents based on the current language
+    function updateTextContent(lang) {
+        document.querySelectorAll('[data-en], [data-pt]').forEach(el => {
+            const content = el.getAttribute(`data-${lang}`); // Get content for the current language
+            if (el.querySelector('a[href^="mailto:"]')) {
+                const emailLink = el.querySelector('a');
+                const wrapper = document.createElement('span'); // Create a span to wrap text content
+                wrapper.textContent = content;
+                // Replace all child nodes except the email link with the new wrapper
+                el.childNodes.forEach(node => {
+                    if (node !== emailLink) {
+                        el.removeChild(node);
+                    }
+                });
+                el.insertBefore(wrapper, emailLink); // Insert the text content before the email link
+            } else {
+                el.textContent = content; // Update text content
+            }
+        });
+    }
+
+    // Initialize the page content in English
+    updateTextContent('en');
 
     toggleBtn.addEventListener('click', () => {
-        // If an animation is currently in progress, ignore the click
         if (isAnimating) return;
 
-        // Set the animation flag
         isAnimating = true;
-
-        // Start the slide-out animation
         img.classList.add('slide-out');
 
-        // Wait for the slide-out animation to finish before switching the flag and updating the image
         setTimeout(() => {
             const isEnglish = img.alt.includes('Change Language');
             const newSrc = isEnglish ? 'images/br-flag.png' : 'images/us-flag.png';
             const newAlt = isEnglish ? 'Mudar idioma para Português' : 'Change Language';
 
-            // Update the image src and alt text
             img.src = newSrc;
             img.alt = newAlt;
 
-            // Switch the language attribute on the body
             const langData = isEnglish ? 'pt' : 'en';
             document.body.setAttribute('lang', langData);
 
-            // Iterate over all elements that need to be updated with language data
-            document.querySelectorAll('[data-en], [data-pt]').forEach(el => {
-                if (el.tagName === 'P' && el.querySelector('a[href^="mailto:"]')) {
-                    const emailLink = el.querySelector('a');
-                    const emailHtml = emailLink.outerHTML;
-                    el.innerHTML = el.getAttribute(`data-${langData}`) + ' ' + emailHtml;
-                } else if (el.tagName === 'TITLE') {
-                    document.title = el.getAttribute(`data-${langData}`);
-                } else {
-                    el.textContent = el.dataset[langData];
-                }
-            });
+            // Update the text contents based on the newly selected language
+            updateTextContent(langData);
 
-            // After setting the new src, start the slide-in animation
             img.classList.remove('slide-out');
             img.classList.add('slide-in');
 
-            // Remove the slide-in class after the animation finishes and allow clicking again
             setTimeout(() => {
                 img.classList.remove('slide-in');
-                isAnimating = false; // Reset the animation flag
+                isAnimating = false;
             }, 500);
         }, 500);
+    });
+});
 
-        // Debug: log the image source to console
-        console.log(`Switching to image: ${newSrc}`);
+document.getElementById('linkToAbout').addEventListener('click', function(e) {
+    e.preventDefault();
+    var aboutSection = document.getElementById('about');
+    var offsetPosition = aboutSection.getBoundingClientRect().top + window.scrollY - 117.5;
+    window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
     });
 });

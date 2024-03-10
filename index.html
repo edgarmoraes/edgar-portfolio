@@ -8,88 +8,82 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="top"></div>
     <header class="nav-bar">
         <div class="container-right">
-            <a href="#logo"><img src="images/edgar-signature-white.png" alt="Edgar Signature" id="edgar-signature-white" style="width: 75px; height: 75px;"></a>
+            <a href="#top"><img src="images/edgar-signature-white.png" alt="Edgar Signature" id="edgar-signature-white" style="width: 75px; height: 75px;"></a>
         </div>
         <div class="container-left">
             <ul class="nav-itens">
-                <li><a href="#about" data-en="About" data-pt="Sobre">About</a></li>
-                <li><a href="#projects" data-en="Projects" data-pt="Projetos">Projects</a></li>
-                <li><a href="#contact" data-en="Contact" data-pt="Contato">Contact</a></li>
+                <li><a href="#about" id="linkToAbout" data-en="About" data-pt="Sobre"></a></li>
+                <li><a href="#projects" data-en="Projects" data-pt="Projetos"></a></li>
+                <li><a href="#contact" data-en="Contact" data-pt="Contato"></a></li>
             </ul>
             <button id="lang-toggle" class="lang-toggle" style="border: none; background: none; padding: 0;">
                 <img class="language-flag" src="images/us-flag.png" alt="Change Language" style="width: 25px; height: 25px;">
             </button>
             <div class="light-dark-button">
                 <div class="toggle">
-                    <input type="checkbox">
+                    <input id="checkbox" type="checkbox">
                     <span class="button"></span>
                     <span class="label"></span>
                 </div>
             </div>
         </div>
     </header>
-        <div class="information">
+        <div class="beggining">
+            <img class="edgar-photo-1" src="images/edgar-photo-1.JPG" alt="Edgar Photo" style="height: 250px;">
+            <div class="description-about-me">
+                <h2>Edgar Moraes</h2>
+                <br>
+                <p style="font-size: 25px; font-weight: 100;" data-en="Financial Analyst & Engineer" data-pt="Analista Financeiro & Engenheiro"></p>
+                <br>
+                <p style="font-size: 15px;" data-en="Fluent in multiple languages, and equipped with advanced skills in Google/Microsoft Office Suite, Python, Power BI, VBA, and R, my expertise spans financial planning, operational efficiency, and compliance, all reinforced by a strong foundation in soft skills crucial for today's global business environment." data-pt="Fluente em vários idiomas e equipado com habilidades avançadas em Google/Microsoft Office Suite, Python, Power BI, VBA e R, minha experiência abrange planejamento financeiro, eficiência operacional e conformidade, tudo reforçado por uma base sólida em habilidades interpessoais cruciais para ambiente de negócios global de hoje."></p>
+                <div class="social-networks">
+                    <div class="grid-social-networks">
+                        <a href="https://www.linkedin.com/in/edgarmoraes/" target="_blank"><img class="linkedin-logo logo" src="images/linkedin-logo.png"></a>
+                        <a href="https://www.instagram.com/oedgarmoraes" target="_blank"><img class="instagram-logo logo" src="images/instagram-logo.png"></a>
+                        <a href="https://www.youtube.com/@oedgarmoraes" target="_blank"><img class="youtube-logo logo" src="images/youtube-logo.png"></a>
+                        <a href="https://twitter.com/oedgarmoraes" target="_blank"><img class="x-logo logo" src="images/x-logo.png"></a>
+                        <a href="https://medium.com/@oedgarmoraes" target="_blank"><img class="medium-logo logo" src="images/medium-logo.png"></a>
+                        <a href="https://github.com/edgarmoraes" target="_blank"><img class="github-logo logo" src="images/github-logo.png"></a>
+                        <a href="https://www.facebook.com/oedgarmoraes" target="_blank"><img class="facebook-logo logo" src="images/facebook-logo.png"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="about" class="information">
             <div class="span-3">
-                <div class="about-me"><img src="images/IMG_7090.png" alt="Edgar Photo" style="width: px; height: 550px;">
+                <div class="about-me"><img class="edgar-photo-2" src="images/edgar-photo-2.png" alt="Edgar Photo" style="height: 560px;">
                     <section class="about-me-content">
-                        <h2>My background</h2>
+                        <h2 data-en="My Background" data-pt="Meu Histórico"></h2>
                         <div>
-                            <p>Edgar Moraes is a Financial Analyst, Engineer and Full-Stack Programmer.</p>
-                            <p>Edgar has an unusual multi-disciplinary background that he brings to the work today. Native from Rio de Janeiro, he attended to Industrial Engineering in Minas Gerais. First starting at Vetor Ltda., a consultancy company, working along side the most notable entrepreneurs. There, he could delevop a series of activities. A while later, he held the position of Corporate Finance Consultant at Finaxe Ltda., where he was responsible for all disciplines of work, including financial analysis and planning, capital structure and funding, investment management and compliance.</p>
-                            <p>Edgar is currently working as Financial Analyst, but he sees the movements that the markets all over the world are doing. He thinks the future is the technology.</p>
+                            <p data-en="Edgar Moraes is a Financial Analyst, Engineer and Full-Stack Programmer." data-pt="Edgar Moraes é Analista Financeiro, Engenheiro e Programador Full-Stack."></p>
+                            <p data-en="Edgar has an unusual multi-disciplinary background that he brings to the work today. Native from Rio de Janeiro, he attended to Industrial Engineering in Minas Gerais. First starting at Vetor Ltda., a consultancy company, working along side the most notable entrepreneurs. There, he could delevop a series of activities. A while later, he held the position of Corporate Finance Consultant at Finaxe Ltda., where he was responsible for all disciplines of work, including financial analysis and planning, capital structure and funding, investment management and compliance." data-pt="Edgar tem uma formação multidisciplinar incomum que traz para o trabalho hoje. Natural do Rio de Janeiro, cursou Engenharia Industrial em Minas Gerais. Começando pela Vetor Ltda., uma empresa de consultoria que trabalhou ao lado dos mais notáveis empreendedores. Um tempo depois, ocupou o cargo de Consultor de Finanças Corporativas na Finaxe Ltda., onde foi responsável por todas as disciplinas de trabalho, incluindo análise e planejamento financeiro, estrutura de capital e funding, gestão de investimentos e compliance."></p>
+                            <p data-en="Edgar is currently working as Financial Analyst, but he sees the movements that the markets all over the world are doing. He thinks the future is the technology." data-pt="Edgar atualmente trabalha como Analista Financeiro, mas vê os movimentos que os mercados ao redor do mundo estão fazendo. Ele acha que o futuro é a tecnologia."></p>
                         </div>
                     </section>
                 </div>
             </div>
             <div class="cards-2 span-2">
                     <section class="industry-experience">
-                        <h2><p>Industry</p>
-                            <p>Experience</p>
+                        <h2>
+                            <p data-en="Industry" data-pt="Experiência"></p>
+                            <p data-en="Experience 🎯" data-pt="na Indústria 🎯">Experience 🎯</p>
                         </h2>
                     </section>
-                    <section class="social-networks">
-                        <h2><p>Visit my</p>
-                            <p>Social Networks</p>
+                    <section class="my-skills">
+                        <h2>
+                            <p data-en="Skills 💡" data-pt="Habilidades 💡"></p>
                         </h2>
-                        <div>
-                            <ul>
-                                <li>LinkedIn,</li>
-                                <li>Instagram,</li>
-                                <li>X,</li>
-                                <li>GitHub,</li>
-                                <li>Discord,</li>
-                                <li>TikTok,</li>
-                                <li>Medium,</li>
-                                <li>Facebook</li>
-                            </ul>
-                        </div>
+                    </section>
+                    <section class="get-in-touch">
+                        <h2>
+                            <p data-en="Get in Touch 💬" data-pt="Entre em Contato 💬"></p>
+                        </h2>
                     </section>
             </div>
         </div>
-        <section id="about">
-            <h2 data-en="About Me" data-pt="Sobre Mim">About Me</h2>
-            <p data-en="Professional graduated in Production Engineering, with extensive experience in the financial and technology areas.
-
-            Highly dedicated professional who is passionate about the pursuit of scientific knowledge. His journey began with a CNPq Scientific Initiation to study the application of general relativity to gravitational waves, a trending topic in 2016.
-            
-            During his professional career he worked as an administrator and financial consultant, where he led several financial areas, developing and executing solid strategies based on in-depth analysis and accurate forecasts. With deep expertise in optimizing costs and boosting profitability, promoting the financial sustainability of companies.
-            
-            Its purpose is to drive organizations towards success, combining a passion for technology and innovation with a commitment to offering consistent and strategic results." data-pt="Profissional formado em Engenharia de Produção, com ampla experiencia na área financeira e tecnologia.
-            
-            Profissional altamente dedicado e apaixonado pela busca do conhecimento científico. Sua jornada iniciou com uma Iniciação Científica do CNPq para estudar a aplicação da relatividade geral às ondas gravitacionais, um tema em voga em 2016.
-            
-            Durante sua trajetória profissional atuou como administrador e consultor financeiro, onde liderou diversas áreas financeiras, desenvolvendo e executando estratégias sólidas baseadas em análises profundas e previsões precisas. Com profunda expertise em otimizar custos e impulsionar a rentabilidade, promovendo a sustentabilidade financeira das empresas.
-            
-            Tem como propósito impulsionar organizações rumo ao sucesso, combinando a paixão pela tecnologia e inovação com o comprometimento em oferecer resultados consistentes e estratégicos.">Professional graduated in Production Engineering, with extensive experience in the financial and technology areas.
-
-            Highly dedicated professional who is passionate about the pursuit of scientific knowledge. His journey began with a CNPq Scientific Initiation to study the application of general relativity to gravitational waves, a trending topic in 2016.
-
-            During his professional career he worked as an administrator and financial consultant, where he led several financial areas, developing and executing solid strategies based on in-depth analysis and accurate forecasts. With deep expertise in optimizing costs and boosting profitability, promoting the financial sustainability of companies.
-
-            Its purpose is to drive organizations towards success, combining a passion for technology and innovation with a commitment to offering consistent and strategic results.</p>
-        </section>
         <section id="projects">
             <h2 data-en="Projects" data-pt="Projetos">Projects</h2>
             <div class="project">
@@ -99,7 +93,7 @@
         </section>
         <section id="contact">
             <h2 data-en="Contact" data-pt="Contato">Contact</h2>
-            <p data-en="Let's get in touch! You can reach me at:" data-pt="Vamos entrar em contato! Você pode me alcançar em:">Let's get in touch! You can reach me at: <a href="mailto:edgardecastromoraes@gmail.com">edgardecastromoraes@gmail.com</a></p>
+            <p class="email" data-en="Let's get in touch! You can reach me at: " data-pt="Vamos entrar em contato! Você pode falar comigo via: "><a href="mailto:edgardecastromoraes@gmail.com">edgardecastromoraes@gmail.com</a></p>
         </section>
     <script src="script.js"></script>
 </body>
