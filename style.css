@@ -6,8 +6,8 @@
 /* Universal Styles */
 :root {
   --primary-font: Quicksand, Inter, -apple-system, BlinkMacSystemFont, Helvetica, sans-serif;
-  --background-color: #ffffff;
-  --text-color: #000000;
+  --background-color: white;
+  --text-color: black;
 }
 
 body {
@@ -25,6 +25,10 @@ section {
 }
 
 /* NAV-BAR */
+.nav-toggle {
+    display: none;
+}
+
 .nav-bar {
     position: fixed;
     background: #412f00a1;
@@ -64,7 +68,8 @@ section {
 }
 
 .nav-itens li a:hover {
-    color: #bebebe;
+    color: black;
+    font-weight: 500;
 }
 
 #edgar-signature-white {
@@ -73,32 +78,32 @@ section {
 }
 
 /* TOPICS */
-.project {
-    background: #f4f4f4;
-    margin: 20px 0px;
-    padding: 15px;
-}
-
-.contact p, .about p, .projects div {
-    max-width: 600px;
-    margin: auto;
-}
-
 .beggining {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #ffffff;
+    background-color: white;
     height: 100vh;
-    margin: 0px 80px 50px 80px;
+    margin-bottom: 50px;
     color: rgb(0, 0, 0);
-    padding: 0px 150px;
+    padding: 0px 230px;
     transition: background-color 0.3s, color 0.3s;
 }
 
 .edgar-photo-1 {
     margin-top: 8rem;
     border-radius: 50%;
+    z-index: 1;
+    box-shadow: 1px 1px 10px -2px rgba(0, 0, 0, 0.281);
+}
+
+.signature-video {
+    position: absolute;
+    margin-top: 19rem;
+    margin-left: 37rem;
+    height: 200px;
+    transform: rotate(15deg);
+    z-index: 0;
 }
 
 .description-about-me h2,
@@ -135,7 +140,7 @@ section {
 
 .information {
     display: grid;
-    margin: 0rem 5rem 0rem 5rem;
+    margin: 0rem 5rem 5rem 5rem;
     grid-template-columns: repeat(5, 1fr);
 }
 
@@ -157,15 +162,16 @@ section {
     display: flex;
     flex-direction: column;
     padding-right: 50px;
+    color: white;
 }
 
 .about-me,
 .industry-experience,
-.my-skills,
+.skills,
 .get-in-touch {
     display: flex;
     margin: 0px 25px;
-    background-color: whitesmoke;
+    background-color: #887c5c;
     border-radius: 10px;
     box-shadow: 1px 1px 10px -2px rgba(0, 0, 0, 0.281);
 }
@@ -180,11 +186,11 @@ section {
     justify-content: center;
     height: 140px;
     padding-left: 100px;
-    color: #ffffff;
-    background-color: #000000;
+    color: white;
+    background-color: black;
     position: relative;
     overflow: hidden;
-    border-radius: 10px; /* Match your design */
+    border-radius: 10px;
     box-shadow: 1px 1px 10px -2px rgba(0, 0, 0, 0.281);
     transition: transform 0.5s ease;
 }
@@ -200,7 +206,7 @@ section {
     background-size: cover;
     background-position: center;
     filter: brightness(0.25);
-    transition: opacity 0.5s ease, filter 0.5s ease;
+    transition: opacity 0.5s ease, filter 0.5s ease, transform 0.5s ease;
     z-index: 0;
 }
 
@@ -212,27 +218,28 @@ section {
 
 .industry-experience:hover::before {
     filter: brightness(0.45) blur(8px);
+    transform: scale(1.05);
 }
 
 .industry-experience:hover h2, .industry-experience:hover p {
     color: #f0f0f0;
 }
 
-.my-skills {
+.skills {
     display: flex;
     flex-direction: column;
     justify-content: center;
     height: 140px;
     padding-left: 100px;
-    color: #ffffff;
-    background-color: #000000;
+    color: white;
+    background-color: black;
     position: relative;
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 1px 1px 10px -2px rgba(0, 0, 0, 0.281);
 }
 
-.my-skills::before {
+.skills::before {
     content: '';
     position: absolute;
     top: 0;
@@ -243,21 +250,22 @@ section {
     background-size: cover;
     background-position: center;
     filter: brightness(0.25);
-    transition: opacity 0.5s ease, filter 0.5s ease;
+    transition: opacity 0.5s ease, filter 0.5s ease, transform 0.5s ease;
     z-index: 0;
 }
 
-.my-skills:hover::before {
+.skills:hover::before {
     filter: brightness(0.45) blur(8px);
+    transform: scale(1.05);
 }
 
-.my-skills h2, .my-skills p {
+.skills h2, .skills p {
     position: relative;
     z-index: 1;
     transition: color 0.5s ease;
 }
 
-.my-skills:hover h2, .my-skills:hover p {
+.skills:hover h2, .skills:hover p {
     color: #f0f0f0;
 }
 
@@ -267,8 +275,8 @@ section {
     justify-content: center;
     height: 140px;
     padding-left: 100px;
-    color: #ffffff;
-    background-color: #000000;
+    color: white;
+    background-color: black;
     position: relative;
     overflow: hidden;
     border-radius: 10px;
@@ -286,12 +294,13 @@ section {
     background-size: cover;
     background-position: center;
     filter: brightness(0.25);
-    transition: opacity 0.5s ease, filter 0.5s ease;
+    transition: opacity 0.5s ease, filter 0.5s ease, transform 0.5s ease;
     z-index: 0;
 }
 
 .get-in-touch:hover::before {
     filter: brightness(0.45) blur(8px);
+    transform: scale(1.05);
 }
 
 .get-in-touch h2, .get-in-touch p {
@@ -305,10 +314,39 @@ section {
 }
 
 .industry-experience p,
-.my-skills p,
+.skills p,
 .get-in-touch p {
     margin: 0px;
     font-weight: 400;
+}
+
+.contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.email {
+    color: inherit;
+    font-size: 100px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.3s ease, font-weight 0.3s ease;
+}
+
+.email:hover {
+    font-weight: 700;
+    transform: scale(1.05);
+}
+
+.division-line {
+    margin: 20px 105px;
+    border-top: 2px solid #887c5c;
+}
+
+.footer-content {
+    background-color: white;
+    height: 10rem;
 }
 
 /* LANGUAGE TOGGLE */
@@ -408,25 +446,14 @@ section {
     color: rgba(0, 0, 0, 0.45);
 }
 
-.email a {
-    color: inherit;
-    text-decoration: none;
-    font-weight: 600;
-    transition: transform 0.3s ease, font-weight 0.3s ease;
-}
-
-.email a:hover {
-    font-weight: 700;
-    transform: scale(1.05);
-}
-
+/* DARK THEME */
 [data-theme="dark"] {
-    --background-color: #000000;
-    --text-color: #FAFAFA;
+    --background-color: black;
+    --text-color: white;
 
     .nav-bar {
         position: fixed;
-        background: #0000006b;
+        background: #00000000;
         width: 100%;
         display: flex;
         align-items: center;
@@ -436,28 +463,138 @@ section {
         top: 0;
     }
 
-    .about-me-content {
-        color: #000000;
+    .about-me {
+    display: flex;
+    margin: 0px 25px;
+    background-color: #312d21;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px -2px rgba(0, 0, 0, 0.281);
     }
 
     .beggining {
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: #000000;
+        background-color: #312d21;
         height: 100vh;
         margin-bottom: 50px;
         color: rgb(255, 255, 255);
-        padding: 0px 100px;
+        padding: 0px 230px;
     }
 
     .logo {
         filter: brightness(0) invert(1);
     }
 
-    .project {
-        background: #292929;
-        margin: 20px 0;
-        padding: 15px;
+    .signature-video {
+        filter: brightness(100);
+    }
+
+    .footer-content {
+        background-color: black;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-bar {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 250px;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-out;
+        background-color: #412f00a1;
+        z-index: 1001;
+    }
+
+    .nav-toggle {
+        display: block;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        cursor: pointer;
+        z-index: 1002;
+    }
+
+    .nav-bar.active {
+        transform: translateX(0%);
+    }
+
+    .container-right, .container-left {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 10px 0;
+        transform: translateX(-50%);
+        transition: transform 0.3s ease-out;
+        will-change: transform;
+    }
+
+    .container-right {
+        margin-top: 80px;
+        margin-left: 100px;
+    }
+
+    .nav-itens {
+        flex-direction: column;
+        padding-left: 30px;
+    }
+
+    .nav-itens li {
+        padding: 5px 0;
+    }
+
+    .lang-toggle {
+        margin-left: 30px;
+    }
+    
+    .light-dark-button {
+        margin-top: 10px;
+        margin-left: 30px;
+    }
+    
+    .edgar-photo-1 {
+        margin-top: 1rem;
+        height: auto;
+    }
+    
+    .signature-video {
+        position: absolute;
+        margin-top: 11rem;
+        margin-left: 19rem;
+        height: 120px;
+        transform: rotate(15deg);
+        z-index: 0;
+    }
+
+    .description-about-me h2 {
+    text-align: center;
+    margin: 0;
+    font-size: 50px;
+    font-weight: 400;
+    }
+
+    .logo {
+        height: 48px;
+    }
+
+    .facebook-logo {
+        display: none;
+    }
+
+    .beggining, .information, .contact, .footer-content {
+        padding: 30px;
+    }
+
+    .grid-social-networks {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .email {
+        font-size: 50px;
     }
 }

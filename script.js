@@ -99,3 +99,13 @@ document.getElementById('linkToAbout').addEventListener('click', function(e) {
         behavior: 'smooth'
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleButton = document.getElementById('navToggle');
+    const navBar = document.querySelector('.nav-bar'); // Target the entire nav-bar for sliding
+
+    toggleButton.addEventListener('click', () => {
+        // Toggle the active class on the nav-bar for the sliding effect
+        navBar.classList.toggle('active');
+    });
+});
