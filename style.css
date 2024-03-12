@@ -501,6 +501,11 @@ section {
 
 
 @media (max-width: 768px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
     .nav-bar {
         display: flex;
         flex-direction: column;
