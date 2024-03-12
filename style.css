@@ -495,13 +495,93 @@ section {
     }
 }
 
+@media (max-width: 1478px) {
 
+    .beggining {
+        height: max-content;
+    }
+
+    .signature-video {
+        position: absolute;
+        margin-top: 17rem;
+        margin-left: 25rem;
+        height: 120px;
+        transform: rotate(15deg);
+        z-index: 0;
+    }
+
+    .information {
+        margin: 20px;
+    }
+
+    .edgar-photo-2 {
+        display: none;
+    }
+
+    .about-me-content {
+        padding: 0px 30px;
+        text-align: left;
+    }
+
+    .about-me,
+    .industry-experience,
+    .skills,
+    .get-in-touch {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 0px;
+        text-align: center;
+    }
+
+    .email {
+        text-align: center;
+        font-size: 80px;
+    }
+
+    [data-theme="dark"] {
+        .beggining {
+            height: max-content;
+        }
+    
+        .signature-video {
+            position: absolute;
+            margin-top: 17rem;
+            margin-left: 25rem;
+            height: 120px;
+            transform: rotate(15deg);
+            z-index: 0;
+        }
+
+        .edgar-photo-2 {
+            display: none;
+        }
+
+        .about-me-content {
+            padding: 0px 30px;
+            text-align: left;
+        }
+    
+        .about-me,
+        .industry-experience,
+        .skills,
+        .get-in-touch {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 0px;
+            text-align: center;
+        }
+
+        .email {
+            text-align: center;
+            font-size: 50px;
+        }
+    }
+}
 
 
 
 
 @media (max-width: 768px) {
-
     body {
         overflow-x: hidden;
     }
@@ -587,12 +667,7 @@ section {
     }
     
     .signature-video {
-        position: absolute;
-        margin-top: 11rem;
-        margin-left: 19rem;
-        height: 120px;
-        transform: rotate(15deg);
-        z-index: 0;
+        display: none;
     }
 
     .description-about-me {
@@ -605,7 +680,7 @@ section {
         font-size: 50px;
         font-weight: 400;
     }
-    
+
     .grid-social-networks {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -618,15 +693,10 @@ section {
         display: none;
     }
 
-    .beggining,
-    .information,
-    .contact,
-    .footer-content {
-        padding: 10px;
-    }
-
     .beggining {
-        margin-bottom: 0px;
+        margin-bottom: 20px;
+        padding: 0px 10px;
+        height: max-content;
     }
 
     .information {
@@ -663,5 +733,138 @@ section {
     .division-line {
         margin: 20px 50px;
         border-top: 2px solid #887c5c;
+    }
+
+    [data-theme="dark"] {
+        body {
+            overflow-x: hidden;
+        }
+    
+        .nav-bar {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 250px;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-out;
+            z-index: 1001;
+        }
+    
+        .nav-toggle {
+            display: block;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            width: 40px;
+            height: 40px;
+            background-color: #887c5c;
+            color: #ffffff;
+            border: none;
+            font-size: 20px;
+            line-height: 40px;
+            text-align: center;
+            cursor: pointer;
+            z-index: 1002;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+    
+        .nav-toggle:hover {
+            background-color: #756950;
+        }
+    
+        .nav-bar.active {
+            transform: translateX(0%);
+        }
+
+        .beggining {
+            margin-bottom: 20px;
+            padding: 0px 10px;
+            height: max-content;
+        }
+    
+        .signature-video {
+            display: none;
+        }
+
+        .information {
+            display: grid;
+            margin: 0rem 0rem 0rem 0rem;
+            grid-template-columns: repeat(1, 1fr);
+        }
+    
+        .edgar-photo-1 {
+            margin-top: 1rem;
+            height: auto;
+        }
+        
+        .signature-video {
+            display: none;
+        }
+    
+        .description-about-me {
+            padding: 0px 35px;
+        }
+    
+        .description-about-me h2 {
+            text-align: center;
+            margin: 0;
+            font-size: 50px;
+            font-weight: 400;
+        }
+    
+        .grid-social-networks {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    
+        .logo {
+            height: 48px;
+        }
+    
+        .facebook-logo {
+            display: none;
+        }
+    
+        .beggining {
+            margin-bottom: 20px;
+            padding: 0px 10px;
+            height: max-content;
+        }
+    
+        .information {
+            display: grid;
+            margin: 0rem 0rem 0rem 0rem;
+            grid-template-columns: repeat(1, 1fr);
+        }
+    
+        .edgar-photo-2 {
+            display: none;
+        }
+    
+        .span-3 {
+            grid-column: span 0;
+        }
+        
+        .span-2 {
+            grid-column: span 0;
+        }
+        
+        .about-me,
+        .industry-experience,
+        .skills,
+        .get-in-touch {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    
+        .email {
+            text-align: center;
+            font-size: 50px;
+        }
+    
     }
 }
