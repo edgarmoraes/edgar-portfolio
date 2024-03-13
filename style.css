@@ -537,11 +537,7 @@ section {
         font-size: 80px;
     }
 
-    [data-theme="dark"] {
-        .nav-bar {
-            background: #14141400;
-        }
-        
+    [data-theme="dark"] {        
         .beggining {
             height: max-content;
         }
@@ -755,7 +751,7 @@ section {
             transform: translateX(-100%);
             transition: transform 0.3s ease-out;
             z-index: 1001;
-            background: #14141400;
+            background: #1414140e;
         }
     
         .nav-toggle {
