@@ -496,7 +496,6 @@ section {
 }
 
 @media (max-width: 1478px) {
-
     .beggining {
         height: max-content;
     }
@@ -539,6 +538,10 @@ section {
     }
 
     [data-theme="dark"] {
+        .nav-bar {
+            background: #14141400;
+        }
+        
         .beggining {
             height: max-content;
         }
@@ -752,6 +755,7 @@ section {
             transform: translateX(-100%);
             transition: transform 0.3s ease-out;
             z-index: 1001;
+            background: #14141400;
         }
     
         .nav-toggle {
