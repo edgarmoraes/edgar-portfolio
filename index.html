@@ -1,102 +1,359 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edgar Moraes</title>
-    <link rel="icon" href="favicon.png" type="image/png">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Edgar Moraes — Financial Analyst & Engineer</title>
+  <meta name="description" content="Edgar Moraes — Analista Financeiro, Engenheiro e Programador Full‑Stack. Planejamento financeiro, eficiência operacional e tecnologia.">
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <style>
+    /* ---------- CSS RESET (mini) ---------- */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html:focus-within{scroll-behavior:smooth}
+    body{min-height:100vh;text-rendering:optimizeLegibility;line-height:1.6;-webkit-font-smoothing:antialiased}
+    img,video{display:block;max-width:100%;height:auto}
+    a{color:inherit;text-decoration:none}
+    ul{list-style:none}
+
+    /* ---------- THEME ---------- */
+    :root{
+      --bg: #ffffff;
+      --surface: #f6f7f9;
+      --text: #0b0c0e;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --accent: #4A90E2; /* azul Serenity */
+      --radius: 16px;
+      --shadow: 0 8px 40px rgba(0,0,0,.07);
+      color-scheme: light;
+    }
+    [data-theme="dark"]{
+      --bg: #0b0c0e;
+      --surface: #0f1115;
+      --text: #e5e7eb;
+      --muted: #9aa3af;
+      --border: #1f242b;
+      --accent: #74b6ff;
+      color-scheme: dark;
+    }
+
+    body{background:var(--bg);color:var(--text);font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji"}
+
+    /* ---------- LAYOUT ---------- */
+    .container{max-width:1100px;margin-inline:auto;padding-inline:20px}
+    section{padding:72px 0}
+
+    /* ---------- NAV ---------- */
+    .nav{position:sticky;top:0;z-index:40;background:color-mix(in oklab, var(--bg) 88%, transparent);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--border)}
+    .nav__inner{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand img{width:44px;height:44px}
+    .brand__name{font-weight:700;letter-spacing:.2px}
+
+    .nav__right{display:flex;align-items:center;gap:10px}
+    .nav__links{display:flex;gap:24px}
+    .nav__link{padding:10px 14px;border-radius:12px;color:var(--muted)}
+    .nav__link[aria-current="page"], .nav__link:hover{color:var(--text);background:var(--surface)}
+
+    .icon-btn{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg);cursor:pointer}
+    .icon-btn:hover{background:var(--surface)}
+
+    /* Mobile menu */
+    .burger{display:none}
+    @media (max-width: 860px){
+      .nav__links{position:fixed;inset:72px 0 auto 0;background:var(--bg);border-bottom:1px solid var(--border);padding:12px 20px;display:grid;grid-template-columns:1fr;gap:8px;transform:translateY(-120%);transition:transform .25s ease}
+      .nav__links.is-open{transform:translateY(0)}
+      .burger{display:inline-flex}
+    }
+
+    /* ---------- HERO ---------- */
+    .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+    .hero__title{font-size:clamp(30px, 6vw, 48px);line-height:1.08;font-weight:800;letter-spacing:.1px}
+    .hero__subtitle{font-size:clamp(16px, 3vw, 20px);color:var(--muted);margin-top:12px}
+    .hero__text{margin-top:18px;color:var(--muted)}
+    .pill{display:inline-block;margin-top:18px;padding:8px 12px;border:1px solid var(--border);border-radius:999px;color:var(--muted)}
+    .actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+    .btn{padding:12px 16px;border-radius:14px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-weight:600}
+    .btn--primary{background:var(--accent);color:#fff;border-color:transparent}
+
+    .socials{display:grid;grid-auto-flow:column;grid-auto-columns:36px;gap:12px;margin-top:20px}
+    .socials img{width:28px;height:28px;transition:filter .2s ease, opacity .2s ease;opacity:.9;filter:grayscale(1) contrast(.95)}
+    .socials a:hover img{opacity:1;filter:none}
+    [data-theme="dark"] .socials img{filter:invert(1) grayscale(1) brightness(1.35) contrast(1.1)}
+
+    .hero__media{justify-self:end}
+    .hero__photo{width:100%;max-width:360px;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .hero__sig{width:min(280px, 60%);margin-top:16px;opacity:.95;mix-blend-mode:normal;transition:filter .2s ease, opacity .2s ease}
+    /* Deixa a assinatura preta clara no dark mode */
+    [data-theme="dark"] .hero__sig{filter:invert(1) brightness(1.2) contrast(.95)}
+
+    @media (max-width: 860px){
+      .hero{grid-template-columns:1fr;gap:28px}
+      .hero__media{justify-self:start}
+    }
+
+    /* ---------- ABOUT ---------- */
+    .about{display:grid;grid-template-columns:.9fr 1.1fr;gap:36px}
+    .about__photo{width:100%;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .kicker{font-size:12px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+    .h2{font-size:clamp(22px, 4.5vw, 32px);line-height:1.2;margin-top:6px}
+    .about p{color:var(--muted);margin-top:12px}
+
+    @media (max-width: 860px){.about{grid-template-columns:1fr}}
+
+    /* ---------- CARDS ---------- */
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:14px}
+    .card{border:1px solid var(--border);background:var(--surface);border-radius:var(--radius);padding:20px}
+    .card h3{font-size:16px;margin-bottom:8px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .chip{border:1px solid var(--border);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted)}
+    @media (max-width: 860px){.cards{grid-template-columns:1fr}}
+
+    /* ---------- EXPERIENCE & EDUCATION ---------- */
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    @media (max-width: 860px){.grid-2{grid-template-columns:1fr}}
+    .item{border:1px solid var(--border);background:var(--surface);border-radius:var(--radius);padding:18px}
+    .role{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+    .role h4{font-size:15px}
+    .when{font-size:13px;color:var(--muted)}
+    .where{font-size:13px;color:var(--muted)}
+    .item p{color:var(--muted);margin-top:8px}
+
+    /* ---------- CTA ---------- */
+    .cta{display:flex;align-items:center;justify-content:space-between;gap:20px;border:1px solid var(--border);background:var(--surface);border-radius:var(--radius);padding:22px}
+    .cta p{font-weight:700}
+    @media (max-width: 640px){.cta{flex-direction:column;align-items:flex-start}}
+
+    /* ---------- FOOTER ---------- */
+    footer{border-top:1px solid var(--border);padding:30px 0;color:var(--muted)}
+
+    /* ---------- UTIL ---------- */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .scroll-pad{scroll-margin-top:96px}
+  </style>
 </head>
 <body>
-    <div id="top"></div>
-    <button id="navToggle" class="nav-toggle">☰</button>
-    <header class="nav-bar">
-        <div class="container-right">
-            <a href="#top"><img src="images/edgar-signature-white.png" alt="Edgar Signature" id="edgar-signature-white" style="width: 75px; height: 75px;"></a>
+  <header class="nav" role="banner">
+    <div class="container nav__inner">
+      <a class="brand" href="#top" aria-label="Ir para o topo">
+        <!-- Brand logo switches: black on light, white on dark -->
+        <img id="brandLogo" src="images/edgar-signature-black.png" alt="Assinatura Edgar" />
+        <span class="brand__name">Edgar Moraes</span>
+      </a>
+      <nav aria-label="Primário">
+        <button id="burger" class="icon-btn burger" aria-controls="navlinks" aria-expanded="false" aria-label="Abrir menu">☰</button>
+        <ul id="navlinks" class="nav__links" role="list">
+          <li><a class="nav__link" href="#about" data-i18n-en="About" data-i18n-pt="Sobre">Sobre</a></li>
+          <li><a class="nav__link" href="#experience" data-i18n-en="Experience" data-i18n-pt="Experiência">Experiência</a></li>
+          <li><a class="nav__link" href="#education" data-i18n-en="Education" data-i18n-pt="Formação">Formação</a></li>
+          <li><a class="nav__link" href="#contact" data-i18n-en="Contact" data-i18n-pt="Contato">Contato</a></li>
+        </ul>
+      </nav>
+      <div class="nav__right">
+        <button id="lang" class="icon-btn" aria-label="Alternar idioma" title="EN / PT">🌐</button>
+        <button id="theme" class="icon-btn" aria-label="Alternar tema" title="Tema claro/escuro">🌓</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="container hero">
+      <div>
+        <h1 class="hero__title" data-i18n-en="Financial Analyst & Engineer" data-i18n-pt="Analista Financeiro & Engenheiro">Analista Financeiro & Engenheiro</h1>
+        <p class="hero__subtitle" data-i18n-en="High‑performance finance, engineering and software — with a minimalist mindset." data-i18n-pt="Finanças, engenharia e software em alta performance — com mentalidade minimalista.">Finanças, engenharia e software em alta performance — com mentalidade minimalista.</p>
+        <p class="hero__text" data-i18n-en="Fluent in multiple languages. Advanced in Google/Microsoft Office, Python, Power BI, VBA and R. Experience in financial planning, operational efficiency and compliance." data-i18n-pt="Fluente em vários idiomas. Avançado em Google/Microsoft Office, Python, Power BI, VBA e R. Experiência em planejamento financeiro, eficiência operacional e compliance.">Fluente em vários idiomas. Avançado em Google/Microsoft Office, Python, Power BI, VBA e R. Experiência em planejamento financeiro, eficiência operacional e compliance.</p>
+        <span class="pill" data-i18n-en="Available for freelance & consulting" data-i18n-pt="Disponível para freelance & consultoria">Disponível para freelance & consultoria</span>
+        <div class="actions">
+          <!-- Mantive o número BR original -->
+          <a class="btn btn--primary" href="https://api.whatsapp.com/send/?phone=5521999606021&text=Ol%C3%A1%2C+gostaria+de+fazer+um+or%C3%A7amento+de+um+projeto+com+voc%C3%AA." target="_blank" rel="noreferrer" data-i18n-en="Let's work together" data-i18n-pt="Vamos trabalhar juntos">Vamos trabalhar juntos</a>
+          <a class="btn" href="#experience" data-i18n-en="See experience" data-i18n-pt="Ver experiência">Ver experiência</a>
         </div>
-        <div class="container-left">
-            <ul class="nav-itens">
-                <li><a href="#about" id="linkToAbout" data-en="About" data-pt="Sobre"></a></li>
-                <li><a href="#projects" data-en="Projects" data-pt="Projetos"></a></li>
-                <li><a href="#contact" data-en="Contact" data-pt="Contato"></a></li>
-            </ul>
-            <button id="lang-toggle" class="lang-toggle" style="border: none; background: none; padding: 0;">
-                <img class="language-flag" src="images/us-flag.png" alt="Change Language" style="width: 25px; height: 25px;">
-            </button>
-            <div class="light-dark-button">
-                <div class="toggle">
-                    <input id="checkbox" type="checkbox">
-                    <span class="button"></span>
-                    <span class="label"></span>
-                </div>
-            </div>
+        <div class="socials" aria-label="Redes sociais">
+          <a href="https://www.linkedin.com/in/edgarmoraes/" target="_blank" rel="noreferrer"><img src="images/linkedin-logo.png" alt="LinkedIn"/></a>
+          <a href="https://www.instagram.com/oedgarmoraes" target="_blank" rel="noreferrer"><img src="images/instagram-logo.png" alt="Instagram"/></a>
+          <a href="https://www.youtube.com/@oedgarmoraes" target="_blank" rel="noreferrer"><img src="images/youtube-logo.png" alt="YouTube"/></a>
+          <a href="https://twitter.com/oedgarmoraes" target="_blank" rel="noreferrer"><img src="images/x-logo.png" alt="X/Twitter"/></a>
+          <a href="https://medium.com/@oedgarmoraes" target="_blank" rel="noreferrer"><img src="images/medium-logo.png" alt="Medium"/></a>
+          <a href="https://github.com/edgarmoraes" target="_blank" rel="noreferrer"><img src="images/github-logo.png" alt="GitHub"/></a>
+          <a href="https://www.facebook.com/oedgarmoraes" target="_blank" rel="noreferrer"><img src="images/facebook-logo.png" alt="Facebook"/></a>
         </div>
-    </header>
-        <div class="beggining">
-            <img class="edgar-photo-1" src="images/edgar-photo-1.JPG" alt="Edgar Photo" style="height: 250px;">
-            <video class="signature-video" autoplay loop muted>
-                <source src="images/edgar-signature-black-animated.webm">
-            </video>
-            <div class="description-about-me">
-                <h2>Edgar Moraes</h2>
-                <br>
-                <p style="font-size: 25px; font-weight: 100;" data-en="Financial Analyst & Engineer" data-pt="Analista Financeiro & Engenheiro"></p>
-                <br>
-                <p style="font-size: 15px;" data-en="Fluent in multiple languages, and equipped with advanced skills in Google/Microsoft Office Suite, Python, Power BI, VBA, and R, my expertise spans financial planning, operational efficiency, and compliance, all reinforced by a strong foundation in soft skills crucial for today's global business environment." data-pt="Fluente em vários idiomas e equipado com habilidades avançadas em Google/Microsoft Office Suite, Python, Power BI, VBA e R, minha experiência abrange planejamento financeiro, eficiência operacional e conformidade, tudo reforçado por uma base sólida em habilidades interpessoais cruciais para ambiente de negócios global de hoje."></p>
-                <div class="social-networks">
-                    <div class="grid-social-networks">
-                        <a href="https://www.linkedin.com/in/edgarmoraes/" target="_blank"><img class="linkedin-logo logo" src="images/linkedin-logo.png"></a>
-                        <a href="https://www.instagram.com/oedgarmoraes" target="_blank"><img class="instagram-logo logo" src="images/instagram-logo.png"></a>
-                        <a href="https://www.youtube.com/@oedgarmoraes" target="_blank"><img class="youtube-logo logo" src="images/youtube-logo.png"></a>
-                        <a href="https://twitter.com/oedgarmoraes" target="_blank"><img class="x-logo logo" src="images/x-logo.png"></a>
-                        <a href="https://medium.com/@oedgarmoraes" target="_blank"><img class="medium-logo logo" src="images/medium-logo.png"></a>
-                        <a href="https://github.com/edgarmoraes" target="_blank"><img class="github-logo logo" src="images/github-logo.png"></a>
-                        <a href="https://www.facebook.com/oedgarmoraes" target="_blank"><img class="facebook-logo logo" src="images/facebook-logo.png"></a>
-                    </div>
-                </div>
+      </div>
+      <div class="hero__media" aria-hidden="true">
+        <img class="hero__photo" src="images/edgar-photo-1.JPG" alt="Foto de Edgar"/>
+        <video class="hero__sig" autoplay loop muted playsinline>
+          <source src="images/edgar-signature-black-animated.webm" type="video/webm"/>
+        </video>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="container about scroll-pad">
+      <div>
+        <img class="about__photo" src="images/edgar-photo-2.png" alt="Edgar em um ambiente profissional"/>
+      </div>
+      <div>
+        <p class="kicker" data-i18n-en="About" data-i18n-pt="Sobre">Sobre</p>
+        <h2 class="h2">Edgar Moraes</h2>
+        <p data-i18n-en="Financial Analyst, Engineer and Full‑Stack Developer." data-i18n-pt="Analista Financeiro, Engenheiro e Desenvolvedor Full‑Stack.">Analista Financeiro, Engenheiro e Desenvolvedor Full‑Stack.</p>
+        <p data-i18n-en="Multi‑disciplinary background spanning finance and technology. Structured thinking, high standards and focus on outcomes." data-i18n-pt="Background multidisciplinar entre finanças e tecnologia. Pensamento estruturado, alto padrão e foco em resultados.">Background multidisciplinar entre finanças e tecnologia. Pensamento estruturado, alto padrão e foco em resultados.</p>
+        <div class="cards" style="margin-top:16px">
+          <article class="card">
+            <h3 data-i18n-en="Industry Experience" data-i18n-pt="Experiência na Indústria">Experiência na Indústria</h3>
+            <div class="chips">
+              <span class="chip">Banking</span>
+              <span class="chip">Consulting</span>
+              <span class="chip">Risk</span>
+              <span class="chip">Data</span>
+              <span class="chip">Ops</span>
             </div>
+          </article>
+          <article class="card">
+            <h3 data-i18n-en="Skills" data-i18n-pt="Habilidades">Habilidades</h3>
+            <div class="chips">
+              <span class="chip">Python</span>
+              <span class="chip">Power BI</span>
+              <span class="chip">VBA</span>
+              <span class="chip">R</span>
+              <span class="chip">SQL</span>
+              <span class="chip">React</span>
+              <span class="chip">Excel</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3 data-i18n-en="Languages" data-i18n-pt="Idiomas">Idiomas</h3>
+            <div class="chips">
+              <span class="chip" title="Nativo">Português</span>
+              <span class="chip" title="Fluente">Inglês</span>
+              <span class="chip" title="B1">Francês</span>
+              <span class="chip" title="A2">Alemão</span>
+              <span class="chip" title="A1">Mandarim</span>
+            </div>
+          </article>
         </div>
-        <div id="about" class="information">
-            <div class="span-3">
-                <div class="about-me"><img class="edgar-photo-2" src="images/edgar-photo-2.png" alt="Edgar Photo" style="height: 560px;">
-                    <section class="about-me-content">
-                        <h2 data-en="My Background" data-pt="Meu Histórico"></h2>
-                        <div>
-                            <p data-en="Edgar Moraes is a Financial Analyst, Engineer and Full-Stack Programmer." data-pt="Edgar Moraes é Analista Financeiro, Engenheiro e Programador Full-Stack."></p>
-                            <p data-en="Edgar has an unusual multi-disciplinary background that he brings to the work today. Native from Rio de Janeiro, he attended to Industrial Engineering in Minas Gerais. First starting at Vetor Ltda., a consultancy company, working along side the most notable entrepreneurs. There, he could delevop a series of activities. A while later, he held the position of Corporate Finance Consultant at Finaxe Ltda., where he was responsible for all disciplines of work, including financial analysis and planning, capital structure and funding, investment management and compliance." data-pt="Edgar tem uma formação multidisciplinar incomum que traz para o trabalho hoje. Natural do Rio de Janeiro, cursou Engenharia Industrial em Minas Gerais. Começando pela Vetor Ltda., uma empresa de consultoria que trabalhou ao lado dos mais notáveis empreendedores. Um tempo depois, ocupou o cargo de Consultor de Finanças Corporativas na Finaxe Ltda., onde foi responsável por todas as disciplinas de trabalho, incluindo análise e planejamento financeiro, estrutura de capital e funding, gestão de investimentos e compliance."></p>
-                            <p data-en="Edgar is currently working as Financial Analyst, but he sees the movements that the markets all over the world are doing. He thinks the future is the technology." data-pt="Edgar atualmente trabalha como Analista Financeiro, mas vê os movimentos que os mercados ao redor do mundo estão fazendo. Ele acha que o futuro é a tecnologia."></p>
-                        </div>
-                    </section>
-                </div>
-            </div>
-            <div class="cards-2 span-2">
-                    <section class="industry-experience">
-                        <h2>
-                            <p data-en="Industry" data-pt="Experiência"></p>
-                            <p data-en="Experience" data-pt="na Indústria"></p>
-                        </h2>
-                    </section>
-                    <section class="skills">
-                        <h2>
-                            <p data-en="Skills" data-pt="Habilidades"></p>
-                        </h2>
-                    </section>
-                    <section class="get-in-touch">
-                        <h2>
-                            <p data-en="Get in Touch" data-pt="Entre em Contato"></p>
-                        </h2>
-                    </section>
-            </div>
-        </div>
-        <section id="contact" class="contact">
-            <p data-en="NEED A PROGRAMMER?" data-pt="PRECISA DE UM PROGRAMADOR?"></p><a class="email" href="https://api.whatsapp.com/send/?phone=5521999606021&text=Ol%C3%A1%2C+gostaria+de+fazer+um+or%C3%A7amento+de+um+projeto+com+voc%C3%AA." data-en="Let's work together →" data-pt="Vamos trabalhar juntos →"></a>
-        </section>
-        <footer>
-            <div class="division-line"></div>
-            <div class="footer-content">
-                Text
-            </div>
-        </footer>
-    <script src="script.js"></script>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="container scroll-pad">
+      <p class="kicker" data-i18n-en="Experience" data-i18n-pt="Experiência">Experiência</p>
+      <h2 class="h2" data-i18n-en="Selected Roles" data-i18n-pt="Principais Cargos">Principais Cargos</h2>
+      <div class="grid-2" style="margin-top:14px">
+        <article class="item">
+          <div class="role"><h4>Market Risk Analyst — Natixis SA</h4><span class="when">Nov 2024 – Presente</span></div>
+          <div class="where">Porto, Portugal</div>
+          <p>Risco de mercado em múltiplos produtos (ações, derivativos, renda fixa). Automação de relatórios com VBA/SQL/Python; ferramentas internas para monitoramento de risco; melhoria de modelos e métricas.</p>
+        </article>
+        <article class="item">
+          <div class="role"><h4>Financial Planning Consultant — PAAG</h4><span class="when">Abr 2024 – Ago 2024</span></div>
+          <div class="where">Rio de Janeiro, Brasil</div>
+          <p>Implantação do Oracle NetSuite; integração com sistemas; eficiência em orçamento e caixa; análises para decisão estratégica.</p>
+        </article>
+        <article class="item">
+          <div class="role"><h4>Financial Analyst — Fhinck</h4><span class="when">Mai 2023 – Abr 2024</span></div>
+          <div class="where">São Paulo, Brasil</div>
+          <p>Estratégia financeira e previsões; otimização de custos (~20% a.a.); compliance; modelos e simulações para cenários e risco, suportando aumento de receita.</p>
+        </article>
+        <article class="item">
+          <div class="role"><h4>Junior Financial Analyst — Finaxe</h4><span class="when">Out 2022 – Abr 2023</span></div>
+          <div class="where">Minas Gerais, Brasil</div>
+          <p>FP&A, orçamento, caixa e reports. Suporte a decisões data‑driven para portfólio de empresas (~US$ 7,5M à época).</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="container scroll-pad">
+      <p class="kicker" data-i18n-en="Education" data-i18n-pt="Formação">Formação</p>
+      <div class="grid-2" style="margin-top:14px">
+        <article class="item">
+          <div class="role"><h4>Mestrado — Data Analysis & Decision Support Systems</h4><span class="when">Set 2024 – Presente</span></div>
+          <div class="where">Coimbra Business School | ISCAC — Coimbra, Portugal</div>
+        </article>
+        <article class="item">
+          <div class="role"><h4>Bacharelado — Engenharia Industrial</h4><span class="when">Dez 2022</span></div>
+          <div class="where">UFSJ — Minas Gerais, Brasil</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT CTA -->
+    <section id="contact" class="container scroll-pad">
+      <div class="cta">
+        <p data-i18n-en="Need a programmer?" data-i18n-pt="Precisa de um programador?">Precisa de um programador?</p>
+        <a class="btn btn--primary" href="https://api.whatsapp.com/send/?phone=5521999606021&text=Ol%C3%A1%2C+gostaria+de+fazer+um+or%C3%A7amento+de+um+projeto+com+voc%C3%AA." target="_blank" rel="noreferrer" data-i18n-en="Let's work together →" data-i18n-pt="Vamos trabalhar juntos →">Vamos trabalhar juntos →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+      <small>© <span id="year"></span> Edgar Moraes</small>
+      <small style="color:var(--muted)">Alta performance, estudo contínuo e design minimalista.</small>
+    </div>
+  </footer>
+
+  <script>
+    // ---------- Helpers ----------
+    const $ = (sel, root=document) => root.querySelector(sel);
+    const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+
+    const PREFS = { themeKey: 'pref-theme', langKey: 'pref-lang' };
+
+    // ---------- Brand logo switch (white on dark, black on light) ----------
+    const brandImg = document.getElementById('brandLogo');
+    function updateBrandLogo(){
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (brandImg) brandImg.src = isDark ? 'images/edgar-signature-white.png' : 'images/edgar-signature-black.png';
+    }
+
+    // ---------- Theme Toggle ----------
+    const themeBtn = $('#theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    function applyTheme(v){
+      document.documentElement.setAttribute('data-theme', v);
+      localStorage.setItem(PREFS.themeKey, v);
+      themeBtn.setAttribute('aria-pressed', v==='dark');
+    }
+    const savedTheme = localStorage.getItem(PREFS.themeKey) || (prefersDark ? 'dark' : 'light');
+    applyTheme(savedTheme);
+    updateBrandLogo();
+    themeBtn.addEventListener('click', ()=>{
+      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      updateBrandLogo();
+    });
+
+    // ---------- Language Toggle ----------
+    const langBtn = $('#lang');
+    function applyLang(lang){
+      document.documentElement.lang = lang;
+      localStorage.setItem(PREFS.langKey, lang);
+      $$('[data-i18n-en]').forEach(el=>{
+        const text = el.getAttribute(`data-i18n-${lang}`);
+        if(text) el.textContent = text;
+      });
+    }
+    const initialLang = localStorage.getItem(PREFS.langKey) || 'pt';
+    applyLang(initialLang);
+    langBtn.addEventListener('click', ()=>{
+      applyLang(document.documentElement.lang === 'pt' ? 'en' : 'pt');
+    });
+
+    // ---------- Mobile menu ----------
+    const burger = $('#burger');
+    const links = $('#navlinks');
+    burger.addEventListener('click', ()=>{
+      const open = links.classList.toggle('is-open');
+      burger.setAttribute('aria-expanded', String(open));
+    });
+    $$('#navlinks a').forEach(a=>a.addEventListener('click', ()=>{
+      links.classList.remove('is-open');
+      burger.setAttribute('aria-expanded','false');
+    }));
+
+    // ---------- Year ----------
+    $('#year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
