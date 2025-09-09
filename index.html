@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Edgar Moraes — Financial Analyst & Engineer</title>
-  <meta name="description" content="Edgar Moraes — Analista Financeiro, Engenheiro e Programador Full‑Stack. Planejamento financeiro, eficiência operacional e tecnologia.">
+  <title>Edgar Moraes — Estratégia, Dados & Software</title>
+  <meta name="description" content="Eu ajudo empresas a decidirem melhor — com dados, finanças e software. Projetos enxutos, entregas rápidas e foco em resultado.">
   <link rel="icon" href="favicon.png" type="image/png" />
   <style>
     /* ---------- CSS RESET (mini) ---------- */
@@ -44,7 +44,7 @@
     section{padding:72px 0}
 
     /* ---------- NAV ---------- */
-    .nav{position:sticky;top:0;z-index:40;background:color-mix(in oklab, var(--bg) 88%, transparent);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--border)}
+    .nav{position:sticky;top:0;z-index:50;background:color-mix(in oklab, var(--bg) 88%, transparent);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--border)}
     .nav__inner{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px}
     .brand{display:flex;align-items:center;gap:12px}
     .brand img{width:44px;height:44px}
@@ -58,17 +58,45 @@
     .icon-btn{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg);cursor:pointer}
     .icon-btn:hover{background:var(--surface)}
 
-    /* Mobile menu */
+    /* Desktop only items */
+    .desktop-only{display:flex;gap:10px}
+    .mobile-only{display:none}
+
+    /* Mobile menu (panel + backdrop) */
     .burger{display:none}
+    .mobile-panel{display:none}
+    .backdrop{display:none}
+
     @media (max-width: 860px){
-      .nav__links{position:fixed;inset:72px 0 auto 0;background:var(--bg);border-bottom:1px solid var(--border);padding:12px 20px;display:grid;grid-template-columns:1fr;gap:8px;transform:translateY(-120%);transition:transform .25s ease}
-      .nav__links.is-open{transform:translateY(0)}
+      .nav__links{display:none}
+      .desktop-only{display:none}
       .burger{display:inline-flex}
+      .mobile-only{display:flex}
+
+      .backdrop{
+        position:fixed;inset:0;background:rgba(0,0,0,.35);backdrop-filter:blur(2px);
+        opacity:0;pointer-events:none;transition:opacity .2s ease;z-index:48;
+      }
+      .backdrop.is-open{opacity:1;pointer-events:auto}
+
+      .mobile-panel{
+        position:fixed;left:0;right:0;top:72px;background:var(--bg);
+        border-bottom:1px solid var(--border);
+        transform:translateY(-110%);transition:transform .25s ease;z-index:49;
+        display:block;
+      }
+      .mobile-panel.is-open{transform:translateY(0)}
+      .mobile-panel__inner{padding:14px 20px;display:grid;gap:10px}
+      .mobile-panel__row{display:grid;gap:8px}
+      .mobile-actions{display:flex;gap:8px}
+      .mobile-links{display:grid;gap:6px}
+      .mobile-link{padding:10px;border-radius:12px;color:var(--muted);border:1px solid var(--border);background:var(--surface)}
+      .mobile-link:hover{color:var(--text)}
     }
 
     /* ---------- HERO ---------- */
     .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
-    .hero__title{font-size:clamp(30px, 6vw, 48px);line-height:1.08;font-weight:800;letter-spacing:.1px}
+    .hero__title{font-size:clamp(28px, 6vw, 44px);line-height:1.08;font-weight:800;letter-spacing:.1px}
     .hero__subtitle{font-size:clamp(16px, 3vw, 20px);color:var(--muted);margin-top:12px}
     .hero__text{margin-top:18px;color:var(--muted)}
     .pill{display:inline-block;margin-top:18px;padding:8px 12px;border:1px solid var(--border);border-radius:999px;color:var(--muted)}
@@ -90,6 +118,7 @@
     @media (max-width: 860px){
       .hero{grid-template-columns:1fr;gap:28px}
       .hero__media{justify-self:start}
+      .hero__sig{display:none} /* esconde animação no mobile */
     }
 
     /* ---------- ABOUT ---------- */
@@ -108,16 +137,6 @@
     .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
     .chip{border:1px solid var(--border);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted)}
     @media (max-width: 860px){.cards{grid-template-columns:1fr}}
-
-    /* ---------- EXPERIENCE & EDUCATION ---------- */
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-    @media (max-width: 860px){.grid-2{grid-template-columns:1fr}}
-    .item{border:1px solid var(--border);background:var(--surface);border-radius:var(--radius);padding:18px}
-    .role{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
-    .role h4{font-size:15px}
-    .when{font-size:13px;color:var(--muted)}
-    .where{font-size:13px;color:var(--muted)}
-    .item p{color:var(--muted);margin-top:8px}
 
     /* ---------- CTA ---------- */
     .cta{display:flex;align-items:center;justify-content:space-between;gap:20px;border:1px solid var(--border);background:var(--surface);border-radius:var(--radius);padding:22px}
@@ -141,17 +160,36 @@
         <span class="brand__name">Edgar Moraes</span>
       </a>
       <nav aria-label="Primário">
-        <button id="burger" class="icon-btn burger" aria-controls="navlinks" aria-expanded="false" aria-label="Abrir menu">☰</button>
-        <ul id="navlinks" class="nav__links" role="list">
+        <ul class="nav__links" role="list">
           <li><a class="nav__link" href="#about" data-i18n-en="About" data-i18n-pt="Sobre">Sobre</a></li>
-          <li><a class="nav__link" href="#experience" data-i18n-en="Experience" data-i18n-pt="Experiência">Experiência</a></li>
-          <li><a class="nav__link" href="#education" data-i18n-en="Education" data-i18n-pt="Formação">Formação</a></li>
+          <li><a class="nav__link" href="#services" data-i18n-en="Services" data-i18n-pt="Serviços">Serviços</a></li>
+          <li><a class="nav__link" href="#projects" data-i18n-en="Projects" data-i18n-pt="Projetos">Projetos</a></li>
           <li><a class="nav__link" href="#contact" data-i18n-en="Contact" data-i18n-pt="Contato">Contato</a></li>
         </ul>
       </nav>
       <div class="nav__right">
-        <button id="lang" class="icon-btn" aria-label="Alternar idioma" title="EN / PT">🌐</button>
-        <button id="theme" class="icon-btn" aria-label="Alternar tema" title="Tema claro/escuro">🌓</button>
+        <div class="desktop-only">
+          <button id="lang" class="icon-btn" aria-label="Alternar idioma" title="EN / PT">🌐</button>
+          <button id="theme" class="icon-btn" aria-label="Alternar tema" title="Tema claro/escuro">🌓</button>
+        </div>
+        <button id="burger" class="icon-btn burger mobile-only" aria-controls="mobile-panel" aria-expanded="false" aria-label="Abrir menu">☰</button>
+      </div>
+    </div>
+
+    <!-- Mobile panel -->
+    <div id="backdrop" class="backdrop" aria-hidden="true"></div>
+    <div id="mobile-panel" class="mobile-panel" aria-hidden="true">
+      <div class="mobile-panel__inner">
+        <div class="mobile-panel__row mobile-links" role="menu">
+          <a class="mobile-link" href="#about" role="menuitem">Sobre</a>
+          <a class="mobile-link" href="#services" role="menuitem">Serviços</a>
+          <a class="mobile-link" href="#projects" role="menuitem">Projetos</a>
+          <a class="mobile-link" href="#contact" role="menuitem">Contato</a>
+        </div>
+        <div class="mobile-panel__row mobile-actions">
+          <button id="m-lang" class="icon-btn" aria-label="Alternar idioma (mobile)">🌐</button>
+          <button id="m-theme" class="icon-btn" aria-label="Alternar tema (mobile)">🌓</button>
+        </div>
       </div>
     </div>
   </header>
@@ -160,14 +198,25 @@
     <!-- HERO -->
     <section class="container hero">
       <div>
-        <h1 class="hero__title" data-i18n-en="Financial Analyst & Engineer" data-i18n-pt="Analista Financeiro & Engenheiro">Analista Financeiro & Engenheiro</h1>
-        <p class="hero__subtitle" data-i18n-en="High‑performance finance, engineering and software." data-i18n-pt="Finanças, engenharia e software em alta performance.">Finanças, engenharia e software em alta performance — com mentalidade minimalista.</p>
-        <p class="hero__text" data-i18n-en="Fluent in multiple languages. Advanced in Google/Microsoft Office, Python, Power BI, VBA and R. Experience in financial planning, operational efficiency and compliance." data-i18n-pt="Fluente em vários idiomas. Avançado em Google/Microsoft Office, Python, Power BI, VBA e R. Experiência em planejamento financeiro, eficiência operacional e compliance.">Fluente em vários idiomas. Avançado em Google/Microsoft Office, Python, Power BI, VBA e R. Experiência em planejamento financeiro, eficiência operacional e compliance.</p>
-        <span class="pill" data-i18n-en="Available for freelance & consulting" data-i18n-pt="Disponível para freelance & consultoria">Disponível para freelance & consultoria</span>
+        <h1 class="hero__title"
+            data-i18n-en="I help companies decide better — with data, finance & software."
+            data-i18n-pt="Eu ajudo empresas a decidirem melhor — com dados, finanças e software.">
+            Eu ajudo empresas a decidirem melhor — com dados, finanças e software.
+        </h1>
+        <p class="hero__subtitle"
+           data-i18n-en="Lean projects, fast delivery, results-first."
+           data-i18n-pt="Projetos enxutos, entregas rápidas e foco em resultado.">
+           Projetos enxutos, entregas rápidas e foco em resultado.
+        </p>
+        <p class="hero__text"
+           data-i18n-en="From market risk to automation and web apps. Clear roadmaps, transparent pricing, and hands-on execution."
+           data-i18n-pt="Do risco de mercado à automação e apps web. Roteiro claro, preço transparente e execução mão na massa.">
+           Do risco de mercado à automação e apps web. Roteiro claro, preço transparente e execução mão na massa.
+        </p>
+        <span class="pill" data-i18n-en="Open for consulting & build sprints" data-i18n-pt="Disponível para consultoria e sprints de desenvolvimento">Disponível para consultoria e sprints de desenvolvimento</span>
         <div class="actions">
-          <!-- Mantive o número BR original -->
-          <a class="btn btn--primary" href="https://api.whatsapp.com/send/?phone=5521999606021&text=Ol%C3%A1%2C+gostaria+de+fazer+um+or%C3%A7amento+de+um+projeto+com+voc%C3%AA." target="_blank" rel="noreferrer" data-i18n-en="Let's work together" data-i18n-pt="Vamos trabalhar juntos">Vamos trabalhar juntos</a>
-          <a class="btn" href="#experience" data-i18n-en="See experience" data-i18n-pt="Ver experiência">Ver experiência</a>
+          <a class="btn btn--primary" href="https://api.whatsapp.com/send/?phone=5521999606021&text=Ol%C3%A1%2C+gostaria+de+fazer+um+projeto+com+voc%C3%AA." target="_blank" rel="noreferrer" data-i18n-en="Let's talk on WhatsApp" data-i18n-pt="Vamos falar no WhatsApp">Vamos falar no WhatsApp</a>
+          <a class="btn" href="#services" data-i18n-en="See how I can help" data-i18n-pt="Ver como posso ajudar">Ver como posso ajudar</a>
         </div>
         <div class="socials" aria-label="Redes sociais">
           <a href="https://www.linkedin.com/in/edgarmoraes/" target="_blank" rel="noreferrer"><img src="images/linkedin-logo.png" alt="LinkedIn"/></a>
@@ -187,92 +236,73 @@
       </div>
     </section>
 
-    <!-- ABOUT -->
+    <!-- ABOUT (pessoal e direto) -->
     <section id="about" class="container about scroll-pad">
       <div>
         <img class="about__photo" src="images/edgar-photo-2.png" alt="Edgar em um ambiente profissional"/>
       </div>
       <div>
         <p class="kicker" data-i18n-en="About" data-i18n-pt="Sobre">Sobre</p>
-        <h2 class="h2">Edgar Moraes</h2>
-        <p data-i18n-en="Financial Analyst, Engineer and Full‑Stack Developer." data-i18n-pt="Analista Financeiro, Engenheiro e Desenvolvedor Full‑Stack.">Analista Financeiro, Engenheiro e Desenvolvedor Full‑Stack.</p>
-        <p data-i18n-en="Multi‑disciplinary background spanning finance and technology. Structured thinking, high standards and focus on outcomes." data-i18n-pt="Background multidisciplinar entre finanças e tecnologia. Pensamento estruturado, alto padrão e foco em resultados.">Background multidisciplinar entre finanças e tecnologia. Pensamento estruturado, alto padrão e foco em resultados.</p>
+        <h2 class="h2">Prazer, sou o Edgar.</h2>
+        <p data-i18n-en="I work at the intersection of finance and technology. Market risk and building products. I like to turn messy spreadsheets into clear systems and automations that save time."
+           data-i18n-pt="Eu trabalho na interseção entre finanças e tecnologia. Risco de mercado e construção de produtos. Gosto de transformar planilhas confusas em sistemas claros e automações que economizam tempo.">
+           Eu trabalho na interseção entre finanças e tecnologia. Risco de mercado e construção de produtos. Gosto de transformar planilhas confusas em sistemas claros e automações que economizam tempo.
+        </p>
         <div class="cards" style="margin-top:16px">
           <article class="card">
-            <h3 data-i18n-en="Industry Experience" data-i18n-pt="Experiência na Indústria">Experiência na Indústria</h3>
+            <h3 data-i18n-en="What I value" data-i18n-pt="O que eu valorizo">O que eu valorizo</h3>
             <div class="chips">
-              <span class="chip">Banking</span>
-              <span class="chip">Consulting</span>
-              <span class="chip">Risk</span>
-              <span class="chip">Data</span>
-              <span class="chip">Ops</span>
+              <span class="chip">Clareza</span>
+              <span class="chip">Velocidade</span>
+              <span class="chip">Qualidade</span>
+              <span class="chip">Transparência</span>
             </div>
           </article>
           <article class="card">
-            <h3 data-i18n-en="Skills" data-i18n-pt="Habilidades">Habilidades</h3>
+            <h3 data-i18n-en="Tools" data-i18n-pt="Ferramentas">Ferramentas</h3>
             <div class="chips">
-              <span class="chip">Python</span>
-              <span class="chip">Power BI</span>
-              <span class="chip">VBA</span>
-              <span class="chip">R</span>
-              <span class="chip">SQL</span>
-              <span class="chip">React</span>
-              <span class="chip">Excel</span>
+              <span class="chip">Python</span><span class="chip">Power BI</span><span class="chip">VBA</span>
+              <span class="chip">R</span><span class="chip">SQL</span><span class="chip">React/TS</span>
             </div>
           </article>
           <article class="card">
-            <h3 data-i18n-en="Languages" data-i18n-pt="Idiomas">Idiomas</h3>
+            <h3 data-i18n-en="Industries" data-i18n-pt="Setores">Setores</h3>
             <div class="chips">
-              <span class="chip" title="Nativo">Português</span>
-              <span class="chip" title="Fluente">Inglês</span>
-              <span class="chip" title="B1">Francês</span>
-              <span class="chip" title="A2">Alemão</span>
-              <span class="chip" title="A1">Mandarim</span>
+              <span class="chip">Banking</span><span class="chip">Consultoria</span><span class="chip">SaaS</span>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- EXPERIENCE -->
-    <section id="experience" class="container scroll-pad">
-      <p class="kicker" data-i18n-en="Experience" data-i18n-pt="Experiência">Experiência</p>
-      <h2 class="h2" data-i18n-en="Selected Roles" data-i18n-pt="Principais Cargos">Principais Cargos</h2>
-      <div class="grid-2" style="margin-top:14px">
-        <article class="item">
-          <div class="role"><h4>Market Risk Analyst — Natixis SA</h4><span class="when">Nov 2024 – Presente</span></div>
-          <div class="where">Porto, Portugal</div>
-          <p>Risco de mercado em múltiplos produtos (ações, derivativos, renda fixa). Automação de relatórios com VBA/SQL/Python; ferramentas internas para monitoramento de risco; melhoria de modelos e métricas.</p>
+    <!-- SERVICES (comercial) -->
+    <section id="services" class="container scroll-pad">
+      <p class="kicker" data-i18n-en="Services" data-i18n-pt="Serviços">Serviços</p>
+      <h2 class="h2" data-i18n-en="How I can help" data-i18n-pt="Como posso ajudar">Como posso ajudar</h2>
+      <div class="cards" style="margin-top:14px">
+        <article class="card">
+          <h3>Market Risk & Analytics</h3>
+          <p style="color:var(--muted);margin-top:6px"
+             data-i18n-en="Dashboards, automation and metrics that actually support decisions. From VaR to stress and daily reporting."
+             data-i18n-pt="Dashboards, automação e métricas que realmente apoiam decisões. De VaR a stress e reports diários.">
+             Dashboards, automação e métricas que realmente apoiam decisões. De VaR a stress e reports diários.
+          </p>
         </article>
-        <article class="item">
-          <div class="role"><h4>Financial Planning Consultant — PAAG</h4><span class="when">Abr 2024 – Ago 2024</span></div>
-          <div class="where">Rio de Janeiro, Brasil</div>
-          <p>Implantação do Oracle NetSuite; integração com sistemas; eficiência em orçamento e caixa; análises para decisão estratégica.</p>
+        <article class="card">
+          <h3>Automação</h3>
+          <p style="color:var(--muted);margin-top:6px"
+             data-i18n-en="Budget, cash flow and performance in one place. Power BI, Excel/VBA and Python talking to each other."
+             data-i18n-pt="Orçamento, caixa e performance no mesmo lugar. Power BI, Excel/VBA e Python conversando entre si.">
+             Orçamento, caixa e performance no mesmo lugar. Power BI, Excel/VBA e Python conversando entre si.
+          </p>
         </article>
-        <article class="item">
-          <div class="role"><h4>Financial Analyst — Fhinck</h4><span class="when">Mai 2023 – Abr 2024</span></div>
-          <div class="where">São Paulo, Brasil</div>
-          <p>Estratégia financeira e previsões; otimização de custos (~20% a.a.); compliance; modelos e simulações para cenários e risco, suportando aumento de receita.</p>
-        </article>
-        <article class="item">
-          <div class="role"><h4>Junior Financial Analyst — Finaxe</h4><span class="when">Out 2022 – Abr 2023</span></div>
-          <div class="where">Minas Gerais, Brasil</div>
-          <p>FP&A, orçamento, caixa e reports. Suporte a decisões data‑driven para portfólio de empresas (~US$ 7,5M à época).</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- EDUCATION -->
-    <section id="education" class="container scroll-pad">
-      <p class="kicker" data-i18n-en="Education" data-i18n-pt="Formação">Formação</p>
-      <div class="grid-2" style="margin-top:14px">
-        <article class="item">
-          <div class="role"><h4>Mestrado — Data Analysis & Decision Support Systems</h4><span class="when">Set 2024 – Presente</span></div>
-          <div class="where">Coimbra Business School | ISCAC — Coimbra, Portugal</div>
-        </article>
-        <article class="item">
-          <div class="role"><h4>Bacharelado — Engenharia Industrial</h4><span class="when">Dez 2022</span></div>
-          <div class="where">UFSJ — Minas Gerais, Brasil</div>
+        <article class="card">
+          <h3>Web Apps & Produtos</h3>
+          <p style="color:var(--muted);margin-top:6px"
+             data-i18n-en="Lean builds with React/TypeScript and fast backends. From internal tools to client-facing apps."
+             data-i18n-pt="Construções enxutas com React/TypeScript e backends rápidos. De ferramentas internas a apps para cliente.">
+             Construções enxutas com React/TypeScript e backends rápidos. De ferramentas internas a apps para cliente.
+          </p>
         </article>
       </div>
     </section>
@@ -280,8 +310,8 @@
     <!-- CONTACT CTA -->
     <section id="contact" class="container scroll-pad">
       <div class="cta">
-        <p data-i18n-en="Need a programmer?" data-i18n-pt="Precisa de um programador?">Precisa de um programador?</p>
-        <a class="btn btn--primary" href="https://api.whatsapp.com/send/?phone=5521999606021&text=Ol%C3%A1%2C+gostaria+de+fazer+um+or%C3%A7amento+de+um+projeto+com+voc%C3%AA." target="_blank" rel="noreferrer" data-i18n-en="Let's work together →" data-i18n-pt="Vamos trabalhar juntos →">Vamos trabalhar juntos →</a>
+        <p data-i18n-en="Need a hand with your next build?" data-i18n-pt="Precisa de ajuda no próximo projeto?">Precisa de ajuda no próximo projeto?</p>
+        <a class="btn btn--primary" href="https://api.whatsapp.com/send/?phone=5521999606021&text=Ol%C3%A1%2C+gostaria+de+fazer+um+projeto+com+voc%C3%AA." target="_blank" rel="noreferrer" data-i18n-en="Let's talk →" data-i18n-pt="Vamos conversar →">Vamos conversar →</a>
       </div>
     </section>
   </main>
@@ -289,7 +319,7 @@
   <footer>
     <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:10px">
       <small>© <span id="year"></span> Edgar Moraes</small>
-      <small style="color:var(--muted)">Alta performance, estudo contínuo.</small>
+      <small style="color:var(--muted)">Menos ruído. Mais resultado.</small>
     </div>
   </footer>
 
@@ -309,23 +339,23 @@
 
     // ---------- Theme Toggle ----------
     const themeBtn = $('#theme');
+    const mThemeBtn = $('#m-theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     function applyTheme(v){
       document.documentElement.setAttribute('data-theme', v);
       localStorage.setItem(PREFS.themeKey, v);
-      themeBtn.setAttribute('aria-pressed', v==='dark');
+      if (themeBtn) themeBtn.setAttribute('aria-pressed', v==='dark');
+      if (mThemeBtn) mThemeBtn.setAttribute('aria-pressed', v==='dark');
+      updateBrandLogo();
     }
     const savedTheme = localStorage.getItem(PREFS.themeKey) || (prefersDark ? 'dark' : 'light');
     applyTheme(savedTheme);
-    updateBrandLogo();
-    themeBtn.addEventListener('click', ()=>{
-      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      applyTheme(next);
-      updateBrandLogo();
-    });
+    themeBtn && themeBtn.addEventListener('click', ()=> applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+    mThemeBtn && mThemeBtn.addEventListener('click', ()=> applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
 
     // ---------- Language Toggle ----------
     const langBtn = $('#lang');
+    const mLangBtn = $('#m-lang');
     function applyLang(lang){
       document.documentElement.lang = lang;
       localStorage.setItem(PREFS.langKey, lang);
@@ -336,21 +366,44 @@
     }
     const initialLang = localStorage.getItem(PREFS.langKey) || 'pt';
     applyLang(initialLang);
-    langBtn.addEventListener('click', ()=>{
-      applyLang(document.documentElement.lang === 'pt' ? 'en' : 'pt');
-    });
+    langBtn && langBtn.addEventListener('click', ()=> applyLang(document.documentElement.lang === 'pt' ? 'en' : 'pt'));
+    mLangBtn && mLangBtn.addEventListener('click', ()=> applyLang(document.documentElement.lang === 'pt' ? 'en' : 'pt'));
 
-    // ---------- Mobile menu ----------
+    // ---------- Mobile panel logic ----------
     const burger = $('#burger');
-    const links = $('#navlinks');
-    burger.addEventListener('click', ()=>{
-      const open = links.classList.toggle('is-open');
-      burger.setAttribute('aria-expanded', String(open));
-    });
-    $$('#navlinks a').forEach(a=>a.addEventListener('click', ()=>{
-      links.classList.remove('is-open');
+    const panel = $('#mobile-panel');
+    const backdrop = $('#backdrop');
+
+    function openPanel(){
+      panel.classList.add('is-open');
+      backdrop.classList.add('is-open');
+      panel.setAttribute('aria-hidden','false');
+      backdrop.setAttribute('aria-hidden','false');
+      burger.setAttribute('aria-expanded','true');
+      // lock scroll
+      document.body.style.overflow = 'hidden';
+    }
+    function closePanel(){
+      panel.classList.remove('is-open');
+      backdrop.classList.remove('is-open');
+      panel.setAttribute('aria-hidden','true');
+      backdrop.setAttribute('aria-hidden','true');
       burger.setAttribute('aria-expanded','false');
-    }));
+      // unlock scroll
+      document.body.style.overflow = '';
+    }
+
+    burger && burger.addEventListener('click', ()=>{
+      const isOpen = panel.classList.contains('is-open');
+      isOpen ? closePanel() : openPanel();
+    });
+    backdrop && backdrop.addEventListener('click', closePanel);
+    // close when clicking a mobile link
+    $$('#mobile-panel a').forEach(a=> a.addEventListener('click', closePanel));
+    // close on ESC
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape' && panel.classList.contains('is-open')) closePanel();
+    });
 
     // ---------- Year ----------
     $('#year').textContent = new Date().getFullYear();
